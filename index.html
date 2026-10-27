@@ -116,7 +116,7 @@
 
                 <!-- Actions -->
                 <div class="flex items-center gap-4">
-                    <button onclick="toggleCart()" class="relative p-2.5 text-gray-200 hover:text-white bg-ocean-800 hover:bg-ocean-800/80 rounded-xl transition">
+                    <button onclick="toggleCart()" aria-label="Open shopping cart" title="Open shopping cart" class="relative p-2.5 text-gray-200 hover:text-white bg-ocean-800 hover:bg-ocean-800/80 rounded-xl transition">
                         <i class="fa-solid fa-cart-shopping text-lg"></i>
                         <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-teal-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-ocean-900 hidden">0</span>
                     </button>
@@ -189,6 +189,12 @@
             </button>
         </div>
     </aside>
+
+    <!-- Floating Cart Shortcut -->
+    <button id="floating-cart-button" onclick="toggleCart()" aria-label="Open shopping cart" title="Open shopping cart" class="fixed bottom-24 right-5 z-40 w-14 h-14 rounded-full bg-teal-600 hover:bg-teal-700 text-white shadow-xl flex items-center justify-center transition hover:scale-105 focus:outline-none focus:ring-4 focus:ring-teal-300">
+        <i class="fa-solid fa-cart-shopping text-xl"></i>
+        <span id="floating-cart-badge" class="absolute -top-1 -right-1 bg-amber-500 text-white text-xs font-bold min-w-5 h-5 px-1 rounded-full flex items-center justify-center border-2 border-white hidden">0</span>
+    </button>
 
     <!-- Notification Toast -->
     <div id="toast-notification" class="fixed bottom-6 right-6 z-50 bg-ocean-900 text-white px-5 py-3 rounded-xl shadow-2xl border border-teal-500/40 flex items-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-none">
@@ -282,7 +288,7 @@
     <section id="services" class="py-16 bg-white border-t border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-12">
-                <span class="text-teal-600 text-sm font-bold tracking-wider uppercase">Services & Support</span>
+                <span class="text-teal-600 text-sm font-bold tracking-wider uppercase">THANK YOU!</span>
             </div>
         </div>
     </section>
@@ -686,6 +692,7 @@
         function updateCartUI() {
             const container = document.getElementById('cart-items-container');
             const badge = document.getElementById('cart-badge');
+            const floatingBadge = document.getElementById('floating-cart-badge');
             const totalDisplay = document.getElementById('cart-total-price');
 
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
@@ -694,8 +701,11 @@
             if (totalItems > 0) {
                 badge.innerText = totalItems;
                 badge.classList.remove('hidden');
+                floatingBadge.innerText = totalItems;
+                floatingBadge.classList.remove('hidden');
             } else {
                 badge.classList.add('hidden');
+                floatingBadge.classList.add('hidden');
             }
 
             totalDisplay.innerText = totalPrice > 0 ? `${storeConfig.currency} ${totalPrice.toFixed(2)}` : "Price on Request";
