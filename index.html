@@ -71,11 +71,11 @@
             <div class="flex items-center gap-4">
                 <span class="flex items-center gap-1">
                     <i class="fa-solid fa-phone text-amber-500"></i>
-                    <span id="top-phone-display">0245 857 063 / 0204 564 353</span>
+                    <span id="top-phone-display">024 585 7063 / 020 456 4353</span>
                 </span>
                 <span class="hidden md:inline-flex items-center gap-1">
                     <i class="fa-solid fa-location-dot text-teal-500"></i>
-                    <span id="top-address-display">New Powmu | Delivery Available</span>
+                    <a id="top-address-display" href="https://maps.app.goo.gl/RU7D9UyaprXCv6xx8" target="_blank" rel="noopener noreferrer" class="hover:text-white underline underline-offset-2">New Powmu, Kpong-Akosombo Rd., Ghana</a>
                 </span>
                 <span class="hidden lg:inline-flex items-center gap-1 text-amber-400 font-medium">
                     <i class="fa-solid fa-mobile-retro"></i> MoMo Services Available
@@ -201,9 +201,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 text-teal-300 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium">
-                        <i class="fa-solid fa-certificate text-teal-400"></i> Premium Aquaculture Inputs & Scientific Equipment
-                    </div>
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
                         Quality Supply of <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300" id="hero-tagline-display">Fish Farming Inputs</span>
                     </h1>
@@ -386,7 +383,7 @@
                     <ul class="space-y-3 text-xs sm:text-sm text-gray-400">
                         <li class="flex items-center gap-3">
                             <i class="fa-solid fa-phone text-amber-500"></i>
-                            <span id="footer-phone-display">0204 564 353 / 0204 564 353</span>
+                            <span id="footer-phone-display">024 585 7063 / 020 456 4353</span>
                         </li>
                         <li class="flex items-center gap-3">
                             <i class="fa-solid fa-envelope text-teal-400"></i>
@@ -394,23 +391,11 @@
                         </li>
                         <li class="flex items-start gap-3">
                             <i class="fa-solid fa-location-dot text-teal-400 mt-1"></i>
-                            <span id="footer-address-display">New Powmu, Ghana</span>
+                            <a id="footer-address-display" href="https://maps.app.goo.gl/RU7D9UyaprXCv6xx8" target="_blank" rel="noopener noreferrer" class="hover:text-white underline underline-offset-2">New Powmu, Kpong-Akosombo Rd., Ghana</a>
                         </li>
                     </ul>
                 </div>
-
-                <!-- Col 4: Business Editor -->
-                <div>
-                    <h4 class="font-bold text-white text-sm mb-4 border-b border-ocean-800 pb-2">Manage Store</h4>
-                    <div class="bg-ocean-900 border border-teal-500/20 p-4 rounded-xl text-xs space-y-3">
-                        <p class="text-gray-400">Update contacts, business details, or product pricing anytime.</p>
-                        <button onclick="openConfigModal()" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-semibold py-2 rounded transition flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-pen-to-square"></i> Open Store Editor
-                        </button>
-                    </div>
-                </div>
-
-            </div>
+</div>
 
             <div class="border-t border-ocean-900 pt-6 text-center text-xs text-gray-500">
                 <p>&copy; 2026 <span id="copyright-brand-display">AKRISET PRODUCTS & SERVICES</span>. All Rights Reserved.</p>
@@ -489,10 +474,10 @@
     <!-- JavaScript Application Code -->
     <script>
         let storeConfig = {
-            whatsappNumber: "233204564353",
+            whatsappNumber: "233245857063",
             businessName: "AKRISET PRODUCTS & SERVICES",
             subtext: "Aquaculture Inputs & Scientific Equipment",
-            displayPhone: "0204 564 353 / 0204 564 353",
+            displayPhone: "024 585 7063 / 020 456 4353",
             currency: "GH₵",
             email: "akriset@gmail.com",
             address: "New Powmu, Kpong-Akosombo Rd., Ghana",
@@ -567,7 +552,7 @@
         });
 
         function loadSavedConfig() {
-            const savedConfig = localStorage.getItem('aquapro_config_v2');
+            const savedConfig = localStorage.getItem('aquapro_config_v3');
             if (savedConfig) {
                 try { storeConfig = JSON.parse(savedConfig); } catch(e) {}
             }
@@ -620,7 +605,7 @@
             storeConfig.email = document.getElementById('config-email').value.trim() || "akriset@gmail.com";
             storeConfig.address = document.getElementById('config-address').value.trim() || "New Powmu, Ghana";
 
-            localStorage.setItem('aquapro_config_v2', JSON.stringify(storeConfig));
+            localStorage.setItem('aquapro_config_v3', JSON.stringify(storeConfig));
 
             applyConfigUI();
             renderProducts();
@@ -630,7 +615,7 @@
 
         function resetToDefaults() {
             if (confirm("Reset store info back to default values?")) {
-                localStorage.removeItem('aquapro_config_v2');
+                localStorage.removeItem('aquapro_config_v3');
                 location.reload();
             }
         }
