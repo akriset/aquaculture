@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaPro Solutions & Supplies | Professional Aquaculture Store</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ocean: {
+                            800: '#1E3E62',
+                            900: '#0F2C59',
+                            950: '#0A1C3B',
+                        },
+                        teal: {
+                            500: '#00A896',
+                            600: '#008E7E',
+                            700: '#007467',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar & badge animations */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00A896;
+            border-radius: 4px;
+        }
+        .glass-nav {
+            background: rgba(15, 44, 89, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .pulse-badge {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-ocean-950 text-gray-300 text-xs sm:text-sm py-2 px-4 border-b border-ocean-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1">
+                    <i class="fa-solid fa-phone text-teal-500"></i>
+                    <span id="top-phone-display">+233 50 000 0000</span>
+                </span>
+                <span class="hidden md:inline-flex items-center gap-1">
+                    <i class="fa-solid fa-location-dot text-teal-500"></i>
+                    <span id="top-address-display">Accra & Kumasi Depots | Nationwide Delivery</span>
+                </span>
+                <span class="hidden lg:inline-flex items-center gap-1 text-emerald-400 font-medium">
+                    <i class="fa-solid fa-shield-halved"></i> Verified Business
+                </span>
+            </div>
+            <div class="flex items-center gap-3">
+                <!-- Owner Admin Button -->
+                <button onclick="openConfigModal()" class="text-xs bg-teal-600 hover:bg-teal-500 font-semibold px-3 py-1 rounded-lg text-white transition flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-pen-to-square"></i> Edit Shop Info & Products
+                </button>
+                <a href="#contact" class="hover:text-teal-400 transition hidden sm:inline">Technical Support</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 glass-nav text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 bg-teal-500 rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-lg group-hover:bg-teal-600 transition">
+                        <i class="fa-solid fa-fish-fins"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight block leading-none" id="brand-name-display">AquaPro</span>
+                        <span class="text-xs text-teal-400 font-medium tracking-widest uppercase block mt-0.5" id="brand-subtext-display">Solutions & Supplies</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                    <a href="#home" class="hover:text-teal-400 transition py-2 border-b-2 border-transparent hover:border-teal-400">Home</a>
+                    <a href="#products" class="hover:text-teal-400 transition py-2 border-b-2 border-transparent hover:border-teal-400">Products</a>
+                    <a href="#services" class="hover:text-teal-400 transition py-2 border-b-2 border-transparent hover:border-teal-400">Services</a>
+                    <a href="#about" class="hover:text-teal-400 transition py-2 border-b-2 border-transparent hover:border-teal-400">About Us</a>
+                    <a href="#testimonials" class="hover:text-teal-400 transition py-2 border-b-2 border-transparent hover:border-teal-400">Reviews</a>
+                    <a href="#contact" class="hover:text-teal-400 transition py-2 border-b-2 border-transparent hover:border-teal-400">Contact</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleCart()" class="relative p-2.5 text-gray-200 hover:text-white bg-ocean-800 hover:bg-ocean-800/80 rounded-xl transition">
+                        <i class="fa-solid fa-cart-shopping text-lg"></i>
+                        <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-teal-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-ocean-900 hidden">0</span>
+                    </button>
+                    
+                    <a href="javascript:void(0)" onclick="quickWhatsAppContact()" class="hidden sm:flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition shadow-md hover:shadow-emerald-600/30">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Ask Expert</span>
+                    </a>
+
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-200 hover:text-white">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-ocean-950 border-t border-ocean-800 px-4 py-4 space-y-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-teal-400 font-medium">Home</a>
+            <a href="#products" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-teal-400 font-medium">Products</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-teal-400 font-medium">Services</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-teal-400 font-medium">About Us</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 hover:text-teal-400 font-medium">Contact</a>
+            <button onclick="openConfigModal(); toggleMobileMenu();" class="w-full text-left py-2 text-teal-400 font-medium flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> Edit Shop Details & Products
+            </button>
+            <button onclick="quickWhatsAppContact(); toggleMobileMenu();" class="w-full mt-2 flex items-center justify-center gap-2 bg-emerald-600 text-white font-semibold py-2.5 rounded-xl">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Chat on WhatsApp
+            </button>
+        </div>
+    </header>
+
+    <!-- Slide-over Cart Drawer & Overlay -->
+    <div id="cart-drawer-overlay" onclick="toggleCart()" class="fixed inset-0 bg-black/60 z-50 transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+
+    <aside id="cart-drawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white z-50 shadow-2xl transition-transform duration-300 transform translate-x-full flex flex-col justify-between">
+        <!-- Cart Header -->
+        <div class="p-5 bg-ocean-950 text-white flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-cart-shopping text-teal-400"></i>
+                <h3 class="font-bold text-lg">Your Order Cart</h3>
+            </div>
+            <button onclick="toggleCart()" class="text-gray-300 hover:text-white p-1">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items List -->
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-5 space-y-3">
+            <!-- Dynamic Cart Items Rendered Here -->
+        </div>
+
+        <!-- Cart Footer & Checkout Form -->
+        <div class="p-5 border-t border-gray-200 bg-gray-50 space-y-4">
+            <div class="flex justify-between items-center text-base font-extrabold text-ocean-900 border-b border-gray-200 pb-3">
+                <span>Estimated Total:</span>
+                <span id="cart-total-price" class="text-teal-600">GH₵ 0.00</span>
+            </div>
+
+            <!-- Customer Details Form -->
+            <div class="space-y-2.5">
+                <h4 class="text-xs font-bold text-gray-700 uppercase tracking-wider">Delivery Information</h4>
+                <input type="text" id="cust-name" placeholder="Your Name / Farm Name *" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                <input type="text" id="cust-location" placeholder="Town / Delivery Address *" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                <input type="tel" id="cust-phone" placeholder="Contact Phone Number *" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                <textarea id="cust-notes" rows="2" placeholder="Special delivery or order notes (optional)" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none"></textarea>
+            </div>
+
+            <button onclick="sendOrderToWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl shadow-lg hover:shadow-emerald-600/30 transition flex items-center justify-center gap-2 text-sm">
+                <i class="fa-brands fa-whatsapp text-xl"></i> Complete Order on WhatsApp
+            </button>
+        </div>
+    </aside>
+
+    <!-- Notification Toast -->
+    <div id="toast-notification" class="fixed bottom-6 right-6 z-50 bg-ocean-900 text-white px-5 py-3 rounded-xl shadow-2xl border border-teal-500/40 flex items-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-teal-400 text-lg"></i>
+        <span id="toast-message" class="text-xs font-semibold">Action completed successfully!</span>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-gradient-to-r from-ocean-950 via-ocean-900 to-ocean-800 text-white py-20 lg:py-28 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#00A896_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 text-teal-300 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium">
+                        <i class="fa-solid fa-certificate text-teal-400"></i> Premium Commercial Grade Aquaculture Supplies
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                        Empowering Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400" id="hero-tagline-display">Fish Farm Yield</span>
+                    </h1>
+                    <p class="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed" id="hero-description-display">
+                        High-protein extrusion feeds, industrial paddlewheel aerators, digital water monitoring kits, and durable pond liners. Directly delivered to your farm site with direct WhatsApp order support.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+                        <a href="#products" class="bg-teal-500 hover:bg-teal-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-teal-500/30 transition flex items-center justify-center gap-2 text-base">
+                            <i class="fa-solid fa-store"></i> Browse Catalog
+                        </a>
+                        <a href="javascript:void(0)" onclick="quickWhatsAppContact()" class="bg-ocean-800/80 hover:bg-ocean-800 text-white font-semibold px-8 py-4 rounded-xl border border-teal-500/30 transition flex items-center justify-center gap-2 text-base">
+                            <i class="fa-brands fa-whatsapp text-emerald-400 text-xl"></i> Talk to Specialist
+                        </a>
+                    </div>
+                    
+                    <!-- Quick Badges -->
+                    <div class="pt-6 border-t border-ocean-800 grid grid-cols-3 gap-4 text-center lg:text-left">
+                        <div>
+                            <div class="text-2xl font-bold text-teal-400">42%+</div>
+                            <div class="text-xs text-gray-400">High Crude Protein</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-teal-400">24/7</div>
+                            <div class="text-xs text-gray-400">Technical Support</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-teal-400">100%</div>
+                            <div class="text-xs text-gray-400">Tested Quality</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Image Showcase -->
+                <div class="relative">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-teal-500/20 group">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80" alt="Aquaculture Fish Farm" class="w-full h-[400px] lg:h-[480px] object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-ocean-950/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 bg-ocean-900/90 backdrop-blur border border-teal-500/30 p-4 rounded-xl flex items-center gap-4">
+                            <div class="bg-teal-500 p-3 rounded-lg text-white">
+                                <i class="fa-solid fa-truck-fast text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Direct Farm Delivery</h4>
+                                <p class="text-xs text-gray-300">Fast transport for feed sacks, heavy machinery & fingerling tanks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Trust Highlights Bar -->
+    <section class="bg-white border-b border-gray-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="flex items-center gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
+                    <div class="w-12 h-12 bg-teal-500/10 text-teal-600 rounded-xl flex items-center justify-center text-xl font-bold shrink-0">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-900 text-sm">Balanced Nutrition</h4>
+                        <p class="text-xs text-gray-500">Formulated for rapid FCR</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
+                    <div class="w-12 h-12 bg-teal-500/10 text-teal-600 rounded-xl flex items-center justify-center text-xl font-bold shrink-0">
+                        <i class="fa-solid fa-wind"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-900 text-sm">Dissolved Oxygen</h4>
+                        <p class="text-xs text-gray-500">Heavy-duty aerators</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
+                    <div class="w-12 h-12 bg-teal-500/10 text-teal-600 rounded-xl flex items-center justify-center text-xl font-bold shrink-0">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-900 text-sm">Water Quality</h4>
+                        <p class="text-xs text-gray-500">Digital pH & Ammonia test kits</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
+                    <div class="w-12 h-12 bg-teal-500/10 text-teal-600 rounded-xl flex items-center justify-center text-xl font-bold shrink-0">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-900 text-sm">Technical Advisory</h4>
+                        <p class="text-xs text-gray-500">Free pond advice with purchase</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Catalog Section -->
+    <section id="products" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-teal-600 text-sm font-bold tracking-wider uppercase">Our Store Catalog</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-ocean-900 mt-1">Aquaculture Supplies & Equipment</h2>
+                <p class="text-gray-600 mt-2 text-sm sm:text-base">Select your needed quantity and order instantly on WhatsApp. Custom bulk discounts available.</p>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10" id="category-tabs">
+                <button onclick="filterCategory('All')" class="cat-btn active px-5 py-2.5 rounded-full text-sm font-semibold transition bg-ocean-900 text-white shadow-md" data-category="All">All Supplies</button>
+                <button onclick="filterCategory('Feed')" class="cat-btn px-5 py-2.5 rounded-full text-sm font-semibold transition bg-white text-gray-700 hover:bg-gray-100 border border-gray-200" data-category="Feed">Fish Feed</button>
+                <button onclick="filterCategory('Aeration')" class="cat-btn px-5 py-2.5 rounded-full text-sm font-semibold transition bg-white text-gray-700 hover:bg-gray-100 border border-gray-200" data-category="Aeration">Aeration & Pumps</button>
+                <button onclick="filterCategory('Testing')" class="cat-btn px-5 py-2.5 rounded-full text-sm font-semibold transition bg-white text-gray-700 hover:bg-gray-100 border border-gray-200" data-category="Testing">Water Testing</button>
+                <button onclick="filterCategory('Liners')" class="cat-btn px-5 py-2.5 rounded-full text-sm font-semibold transition bg-white text-gray-700 hover:bg-gray-100 border border-gray-200" data-category="Liners">Pond Liners & Tarps</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="products-grid">
+                <!-- JavaScript will populate products here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white border-t border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-teal-600 text-sm font-bold tracking-wider uppercase">Professional Services</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-ocean-900 mt-1">Technical Aquaculture Engineering</h2>
+                <p class="text-gray-600 mt-2 text-sm sm:text-base">Beyond supplying products, our team builds, tests, and maintains high-yield fish farming operations.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition">
+                    <div class="w-14 h-14 bg-ocean-900 text-teal-400 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-compass-drafting"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-ocean-900 mb-2">Pond Construction & Tarpaulin Tanks</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Design & setup of earthen ponds, HDPE tarpaulin tank systems, and RAS (Recirculating Aquaculture Systems) tailored to your farm capacity.</p>
+                    <button onclick="requestService('Pond Construction & Tank Setup')" class="text-teal-600 hover:text-teal-700 font-bold text-sm inline-flex items-center gap-1">
+                        Book Consultation <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition">
+                    <div class="w-14 h-14 bg-ocean-900 text-teal-400 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-vial-circle-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-ocean-900 mb-2">Water Quality & Disease Diagnostics</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">On-site water testing for dissolved oxygen, ammonia toxicity, pH balance, and microbiological fish pathology diagnostics.</p>
+                    <button onclick="requestService('Water Quality Testing')" class="text-teal-600 hover:text-teal-700 font-bold text-sm inline-flex items-center gap-1">
+                        Schedule Site Visit <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition">
+                    <div class="w-14 h-14 bg-ocean-900 text-teal-400 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-ocean-900 mb-2">Equipment Maintenance & Solar Setup</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Installation and repair of paddlewheel aerators, solar submersible pumps, blowers, and automatic fish feeders.</p>
+                    <button onclick="requestService('Equipment Installation')" class="text-teal-600 hover:text-teal-700 font-bold text-sm inline-flex items-center gap-1">
+                        Request Technician <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-16 bg-ocean-950 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-teal-400 text-sm font-bold tracking-wider uppercase">About AquaPro Solutions</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">Your Trusted Partner in Sustainable Commercial Aquaculture</h2>
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                        Founded by aquaculture engineers and seasoned fish farmers, AquaPro Solutions provides high-performance feeds, aeration machinery, and water treatment solutions to maximize survival rates and harvest weight.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check-circle text-teal-400 text-lg mt-1"></i>
+                            <p class="text-sm text-gray-300"><strong class="text-white">Strict Quality Testing:</strong> All feeds are fresh, extruded floating pellets certified for optimal Feed Conversion Ratios (FCR).</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check-circle text-teal-400 text-lg mt-1"></i>
+                            <p class="text-sm text-gray-300"><strong class="text-white">Direct WhatsApp Logistics:</strong> Instant order placement with transparent delivery scheduling straight to your farm gate.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-check-circle text-teal-400 text-lg mt-1"></i>
+                            <p class="text-sm text-gray-300"><strong class="text-white">After-Sale Advisory:</strong> Free phone consultation with our aquatic disease specialists for bulk buyers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expert Card / Image -->
+                <div class="bg-ocean-900 border border-teal-500/30 rounded-2xl p-8 relative">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-teal-500 rounded-full flex items-center justify-center text-2xl text-white font-bold">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg text-white">Ing. Samuel K. Osei</h4>
+                            <p class="text-xs text-teal-400">Head Aquaculture Engineer</p>
+                        </div>
+                    </div>
+                    <blockquote class="text-gray-300 text-sm italic mb-6">
+                        "Water quality management and proper crude protein intake account for 80% of fish farming profitability. We don't just sell equipment; we guide you to harvest success."
+                    </blockquote>
+                    <div class="flex items-center justify-between text-xs text-gray-400 border-t border-ocean-800 pt-4">
+                        <span><i class="fa-solid fa-award text-teal-400"></i> Certified Aquatic Technologist</span>
+                        <span>12+ Years Field Experience</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-teal-600 text-sm font-bold tracking-wider uppercase">Farmer Testimonials</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-ocean-900 mt-1">Trusted By Commercial Fish Farms</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                    <div class="flex text-amber-400 text-sm mb-3">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 text-sm italic mb-4">"The 2HP paddlewheel aerator reduced our mortality rate to zero during night low-oxygen drops. Their WhatsApp response is instant!"</p>
+                    <div class="font-bold text-ocean-900 text-sm">Kwame Mensah</div>
+                    <div class="text-xs text-gray-500">GreenPasture Tilapia Farms</div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                    <div class="flex text-amber-400 text-sm mb-3">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 text-sm italic mb-4">"High protein extruded feeds made my Catfish reach 1.2kg average in 5 months. Excellent delivery speed via their WhatsApp checkout."</p>
+                    <div class="font-bold text-ocean-900 text-sm">David Oduro</div>
+                    <div class="text-xs text-gray-500">Delta Catfish Hatcheries</div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                    <div class="flex text-amber-400 text-sm mb-3">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 text-sm italic mb-4">"Their digital water master kit saved my fingerling pond from toxic ammonia spikes. Very genuine equipment."</p>
+                    <div class="font-bold text-ocean-900 text-sm">Grace Addo</div>
+                    <div class="text-xs text-gray-500">Blue River Aquafarm</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer & Contact Section -->
+    <footer id="contact" class="bg-ocean-950 text-white pt-16 pb-8 border-t border-ocean-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                
+                <!-- Col 1: Brand & Bio -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-teal-500 rounded-xl flex items-center justify-center text-white text-xl font-bold">
+                            <i class="fa-solid fa-fish-fins"></i>
+                        </div>
+                        <span class="text-xl font-extrabold tracking-tight" id="footer-brand-display">AquaPro</span>
+                    </div>
+                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed" id="footer-about-display">
+                        Leading provider of commercial aquaculture equipment, premium floating fish feed, water testing kits, and pond construction.
+                    </p>
+                    <div class="flex gap-3 text-gray-400">
+                        <a href="#" class="w-8 h-8 rounded-lg bg-ocean-900 flex items-center justify-center hover:text-teal-400 hover:bg-ocean-800 transition"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-ocean-900 flex items-center justify-center hover:text-teal-400 hover:bg-ocean-800 transition"><i class="fa-brands fa-instagram text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-lg bg-ocean-900 flex items-center justify-center hover:text-teal-400 hover:bg-ocean-800 transition"><i class="fa-brands fa-whatsapp text-sm"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div>
+                    <h4 class="font-bold text-white text-sm mb-4 border-b border-ocean-800 pb-2">Quick Navigation</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-gray-400">
+                        <li><a href="#products" class="hover:text-teal-400 transition">Fish Feeds & Extrusions</a></li>
+                        <li><a href="#products" class="hover:text-teal-400 transition">Paddlewheel Aerators</a></li>
+                        <li><a href="#products" class="hover:text-teal-400 transition">Water Quality Testing</a></li>
+                        <li><a href="#services" class="hover:text-teal-400 transition">Pond Construction</a></li>
+                        <li><a href="#about" class="hover:text-teal-400 transition">Expert Technical Team</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Contact Info -->
+                <div>
+                    <h4 class="font-bold text-white text-sm mb-4 border-b border-ocean-800 pb-2">Direct Contact</h4>
+                    <ul class="space-y-3 text-xs sm:text-sm text-gray-400">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-teal-400"></i>
+                            <span id="footer-phone-display">+233 50 000 0000</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-teal-400"></i>
+                            <span id="footer-email-display">sales@aquaprosolutions.com</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-teal-400 mt-1"></i>
+                            <span id="footer-address-display">Central Aquaculture Depot, Industrial Area, Ghana</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-clock text-teal-400"></i>
+                            <span>Mon - Sat: 7:30 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Trust & Guarantee -->
+                <div>
+                    <h4 class="font-bold text-white text-sm mb-4 border-b border-ocean-800 pb-2">Verified Guarantee</h4>
+                    <div class="bg-ocean-900 border border-teal-500/20 p-4 rounded-xl text-xs space-y-2">
+                        <div class="flex items-center gap-2 text-emerald-400 font-bold">
+                            <i class="fa-solid fa-shield-check"></i> Genuine Product Assurance
+                        </div>
+                        <p class="text-gray-400">All feeds and electrical aerators undergo factory quality check before dispatch.</p>
+                        <button onclick="openConfigModal()" class="w-full mt-2 bg-teal-600 hover:bg-teal-500 text-white font-semibold py-2 rounded transition">
+                            <i class="fa-solid fa-pen-to-square"></i> Open Store Editor
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="border-t border-ocean-900 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4">
+                <p>&copy; 2026 <span id="copyright-brand-display">AquaPro Solutions</span>. All Rights Reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-gray-400">Privacy Policy</a>
+                    <a href="#" class="hover:text-gray-400">Terms of Service</a>
+                    <a href="#" class="hover:text-gray-400">Delivery Information</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Store Settings / Business Configurator Modal -->
+    <div id="config-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative space-y-6 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeConfigModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="flex items-center gap-3 text-ocean-900 border-b border-gray-100 pb-4">
+                <div class="w-10 h-10 bg-teal-500/10 text-teal-600 rounded-xl flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-solid fa-sliders"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg">Shop Customizer & Admin Panel</h3>
+                    <p class="text-xs text-gray-500">Update your business details, contacts, and products directly without coding</p>
+                </div>
+            </div>
+
+            <!-- Tabs: Store Details vs Product Manager -->
+            <div class="flex gap-2 border-b border-gray-200">
+                <button onclick="switchAdminTab('details')" id="tab-btn-details" class="px-4 py-2 text-xs sm:text-sm font-bold text-teal-600 border-b-2 border-teal-600">
+                    Store Details & Contacts
+                </button>
+                <button onclick="switchAdminTab('products')" id="tab-btn-products" class="px-4 py-2 text-xs sm:text-sm font-bold text-gray-500 hover:text-teal-600">
+                    Manage Products Catalog (<span id="admin-product-count">0</span>)
+                </button>
+            </div>
+
+            <!-- Tab 1: Store Details -->
+            <div id="admin-tab-details" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Business Name *</label>
+                        <input type="text" id="config-name" placeholder="e.g. AquaPro Solutions" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Subtext / Tagline</label>
+                        <input type="text" id="config-subtext" placeholder="e.g. Solutions & Supplies" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">WhatsApp Number (No + / spaces)</label>
+                        <input type="text" id="config-phone" placeholder="e.g. 233500000000" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Display Phone Number</label>
+                        <input type="text" id="config-display-phone" placeholder="e.g. +233 50 000 0000" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Currency Symbol</label>
+                        <input type="text" id="config-currency" placeholder="e.g. GH₵ or $" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Business Email</label>
+                        <input type="email" id="config-email" placeholder="e.g. sales@aquapro.com" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Physical Address / Location</label>
+                        <input type="text" id="config-address" placeholder="e.g. Central Depot, Kumasi Road" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Hero Main Highlight / Title</label>
+                    <input type="text" id="config-hero-title" placeholder="e.g. Fish Farm Yield" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Business Short Description</label>
+                    <textarea id="config-about" rows="2" placeholder="Brief summary of your business..." class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none"></textarea>
+                </div>
+            </div>
+
+            <!-- Tab 2: Manage Products Catalog -->
+            <div id="admin-tab-products" class="space-y-4 hidden">
+                <div class="bg-gray-50 border border-gray-200 p-3 rounded-xl space-y-3">
+                    <h4 class="text-xs font-bold text-ocean-900 uppercase">Add / Edit Product</h4>
+                    <input type="hidden" id="prod-edit-id" value="">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <input type="text" id="prod-name" placeholder="Product Name (e.g. Starter Feed)" class="text-xs p-2 rounded-lg border border-gray-300">
+                        <select id="prod-category" class="text-xs p-2 rounded-lg border border-gray-300">
+                            <option value="Feed">Fish Feed</option>
+                            <option value="Aeration">Aeration & Pumps</option>
+                            <option value="Testing">Water Testing</option>
+                            <option value="Liners">Pond Liners & Tarps</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2">
+                        <input type="number" step="0.01" id="prod-price" placeholder="Price (e.g. 35.00)" class="text-xs p-2 rounded-lg border border-gray-300">
+                        <input type="text" id="prod-unit" placeholder="Unit (e.g. 20kg Sack)" class="text-xs p-2 rounded-lg border border-gray-300">
+                        <input type="text" id="prod-badge" placeholder="Badge (e.g. Best Seller)" class="text-xs p-2 rounded-lg border border-gray-300">
+                    </div>
+
+                    <input type="text" id="prod-spec" placeholder="Specification (e.g. 42% Crude Protein, 2mm)" class="w-full text-xs p-2 rounded-lg border border-gray-300">
+                    <input type="text" id="prod-image" placeholder="Image URL (or leave blank for placeholder)" class="w-full text-xs p-2 rounded-lg border border-gray-300">
+
+                    <div class="flex gap-2">
+                        <button onclick="saveProductForm()" class="bg-teal-600 hover:bg-teal-500 text-white font-bold px-4 py-2 rounded-lg text-xs transition">
+                            Save Product
+                        </button>
+                        <button onclick="resetProductForm()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold px-3 py-2 rounded-lg text-xs transition">
+                            Clear
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Products Table -->
+                <div class="overflow-x-auto max-h-48 border border-gray-200 rounded-xl">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-ocean-900 text-white">
+                            <tr>
+                                <th class="p-2">Name</th>
+                                <th class="p-2">Category</th>
+                                <th class="p-2">Price</th>
+                                <th class="p-2 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-products-table">
+                            <!-- Filled dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="pt-3 border-t border-gray-100 flex gap-2">
+                <button onclick="saveConfig()" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-3 rounded-xl transition shadow-md">
+                    Apply & Save All Changes
+                </button>
+                <button onclick="resetToDefaults()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs font-bold px-4 py-3 rounded-xl transition">
+                    Reset Defaults
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Code -->
+    <script>
+        // Store Configuration State with default Ghana aquaculture details
+        let storeConfig = {
+            whatsappNumber: "233500000000",
+            businessName: "AquaPro Solutions",
+            subtext: "Supplies & Engineering",
+            displayPhone: "+233 50 000 0000",
+            currency: "GH₵",
+            email: "sales@aquaprosolutions.com",
+            address: "Central Depot, Industrial Area, Accra & Kumasi, Ghana",
+            heroTitle: "Fish Farm Yield",
+            about: "Leading provider of commercial aquaculture equipment, high-protein floating feed, digital water testing kits, and pond construction."
+        };
+
+        // Default Product Catalog Data
+        let productsData = [
+            {
+                id: 1,
+                name: "High-Protein Extruded Floating Feed (42% Protein)",
+                category: "Feed",
+                price: 320.00,
+                unit: "20kg Sack",
+                spec: "Pellet Size: 2.0mm / Starter Feed",
+                stock: "In Stock",
+                badge: "Best Seller",
+                image: "https://images.unsplash.com/photo-1590682680695-43b964a3ae17?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 2,
+                name: "Finisher Tilapia & Catfish Feed (38% Protein)",
+                category: "Feed",
+                price: 280.00,
+                unit: "20kg Sack",
+                spec: "Pellet Size: 4.0mm - 6.0mm",
+                stock: "In Stock",
+                badge: "High FCR",
+                image: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 3,
+                name: "2HP Electric Paddlewheel Aerator (4-Impeller)",
+                category: "Aeration",
+                price: 5400.00,
+                unit: "Complete Set",
+                spec: "220V Heavy Duty Motor / Stainless Frame",
+                stock: "In Stock",
+                badge: "Industrial Grade",
+                image: "https://images.unsplash.com/photo-1516214104703-d870798883c5?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 4,
+                name: "Solar Powered Submersible Aeration Pump",
+                category: "Aeration",
+                price: 3800.00,
+                unit: "Set with Panel",
+                spec: "120W / Continuous Oxygen Diffusion",
+                stock: "Limited Stock",
+                badge: "Eco Solar",
+                image: "https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 5,
+                name: "Digital Aquaculture Master Water Kit",
+                category: "Testing",
+                price: 850.00,
+                unit: "Meter & Reagents",
+                spec: "Tests: Dissolved Oxygen, pH, Ammonia, Nitrite",
+                stock: "In Stock",
+                badge: "Essential",
+                image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 6,
+                name: "Heavy Duty 0.5mm HDPE Pond Liner",
+                category: "Liners",
+                price: 1100.00,
+                unit: "Per 10m x 6m Sheet",
+                spec: "UV Resistant / Anti-Puncture Guaranteed",
+                stock: "In Stock",
+                badge: "Durable",
+                image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        // Global Cart State
+        let cart = [];
+        let activeCategory = "All";
+
+        // Initialize App on DOM Load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSavedConfig();
+            renderProducts();
+            updateCartUI();
+        });
+
+        // Config Management
+        function loadSavedConfig() {
+            const savedConfig = localStorage.getItem('aquapro_config_v2');
+            if (savedConfig) {
+                try { storeConfig = JSON.parse(savedConfig); } catch(e) {}
+            }
+            const savedProducts = localStorage.getItem('aquapro_products_v2');
+            if (savedProducts) {
+                try { productsData = JSON.parse(savedProducts); } catch(e) {}
+            }
+            applyConfigUI();
+        }
+
+        function applyConfigUI() {
+            document.getElementById('brand-name-display').innerText = storeConfig.businessName;
+            document.getElementById('brand-subtext-display').innerText = storeConfig.subtext;
+            document.getElementById('footer-brand-display').innerText = storeConfig.businessName;
+            document.getElementById('copyright-brand-display').innerText = storeConfig.businessName;
+            
+            document.getElementById('top-phone-display').innerText = storeConfig.displayPhone;
+            document.getElementById('footer-phone-display').innerText = storeConfig.displayPhone;
+            document.getElementById('top-address-display').innerText = storeConfig.address;
+            document.getElementById('footer-address-display').innerText = storeConfig.address;
+            document.getElementById('footer-email-display').innerText = storeConfig.email;
+            document.getElementById('footer-about-display').innerText = storeConfig.about;
+            document.getElementById('hero-tagline-display').innerText = storeConfig.heroTitle;
+            
+            // Input Fields
+            document.getElementById('config-phone').value = storeConfig.whatsappNumber;
+            document.getElementById('config-name').value = storeConfig.businessName;
+            document.getElementById('config-subtext').value = storeConfig.subtext;
+            document.getElementById('config-display-phone').value = storeConfig.displayPhone;
+            document.getElementById('config-currency').value = storeConfig.currency;
+            document.getElementById('config-email').value = storeConfig.email;
+            document.getElementById('config-address').value = storeConfig.address;
+            document.getElementById('config-hero-title').value = storeConfig.heroTitle;
+            document.getElementById('config-about').value = storeConfig.about;
+
+            renderAdminProductsTable();
+        }
+
+        function switchAdminTab(tab) {
+            if (tab === 'details') {
+                document.getElementById('admin-tab-details').classList.remove('hidden');
+                document.getElementById('admin-tab-products').classList.add('hidden');
+                document.getElementById('tab-btn-details').className = "px-4 py-2 text-xs sm:text-sm font-bold text-teal-600 border-b-2 border-teal-600";
+                document.getElementById('tab-btn-products').className = "px-4 py-2 text-xs sm:text-sm font-bold text-gray-500 hover:text-teal-600";
+            } else {
+                document.getElementById('admin-tab-details').classList.add('hidden');
+                document.getElementById('admin-tab-products').classList.remove('hidden');
+                document.getElementById('tab-btn-details').className = "px-4 py-2 text-xs sm:text-sm font-bold text-gray-500 hover:text-teal-600";
+                document.getElementById('tab-btn-products').className = "px-4 py-2 text-xs sm:text-sm font-bold text-teal-600 border-b-2 border-teal-600";
+            }
+        }
+
+        function openConfigModal() {
+            document.getElementById('config-modal').classList.remove('hidden');
+        }
+
+        function closeConfigModal() {
+            document.getElementById('config-modal').classList.add('hidden');
+        }
+
+        function saveConfig() {
+            const phone = document.getElementById('config-phone').value.trim();
+            if (!phone) {
+                alert('Please enter a WhatsApp phone number.');
+                return;
+            }
+
+            storeConfig.whatsappNumber = phone.replace(/[^0-9]/g, '');
+            storeConfig.businessName = document.getElementById('config-name').value.trim() || "AquaPro Solutions";
+            storeConfig.subtext = document.getElementById('config-subtext').value.trim() || "Supplies & Engineering";
+            storeConfig.displayPhone = document.getElementById('config-display-phone').value.trim() || "+" + storeConfig.whatsappNumber;
+            storeConfig.currency = document.getElementById('config-currency').value.trim() || "GH₵";
+            storeConfig.email = document.getElementById('config-email').value.trim() || "sales@aquapro.com";
+            storeConfig.address = document.getElementById('config-address').value.trim() || "Accra / Kumasi, Ghana";
+            storeConfig.heroTitle = document.getElementById('config-hero-title').value.trim() || "Fish Farm Yield";
+            storeConfig.about = document.getElementById('config-about').value.trim();
+
+            localStorage.setItem('aquapro_config_v2', JSON.stringify(storeConfig));
+            localStorage.setItem('aquapro_products_v2', JSON.stringify(productsData));
+
+            applyConfigUI();
+            renderProducts();
+            updateCartUI();
+            closeConfigModal();
+            showToast("Shop details & products updated successfully!");
+        }
+
+        function resetToDefaults() {
+            if (confirm("Reset store info and catalog back to default demo values?")) {
+                localStorage.removeItem('aquapro_config_v2');
+                localStorage.removeItem('aquapro_products_v2');
+                location.reload();
+            }
+        }
+
+        // Product Form Handlers
+        function renderAdminProductsTable() {
+            const table = document.getElementById('admin-products-table');
+            document.getElementById('admin-product-count').innerText = productsData.length;
+            table.innerHTML = '';
+
+            productsData.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-gray-100 hover:bg-gray-50";
+                tr.innerHTML = `
+                    <td class="p-2 font-bold">${p.name}</td>
+                    <td class="p-2 text-gray-500">${p.category}</td>
+                    <td class="p-2 font-bold text-teal-600">${storeConfig.currency} ${p.price.toFixed(2)}</td>
+                    <td class="p-2 text-right space-x-1">
+                        <button onclick="editProduct(${p.id})" class="text-blue-600 hover:underline">Edit</button>
+                        <button onclick="deleteProduct(${p.id})" class="text-red-600 hover:underline">Delete</button>
+                    </td>
+                `;
+                table.appendChild(tr);
+            });
+        }
+
+        function saveProductForm() {
+            const id = document.getElementById('prod-edit-id').value;
+            const name = document.getElementById('prod-name').value.trim();
+            const category = document.getElementById('prod-category').value;
+            const price = parseFloat(document.getElementById('prod-price').value) || 0;
+            const unit = document.getElementById('prod-unit').value.trim() || "Unit";
+            const badge = document.getElementById('prod-badge').value.trim() || "Popular";
+            const spec = document.getElementById('prod-spec').value.trim() || "";
+            const image = document.getElementById('prod-image').value.trim() || "https://placehold.co/600x400/0F2C59/ffffff?text=Product";
+
+            if (!name) {
+                alert("Please enter product name");
+                return;
+            }
+
+            if (id) {
+                // Update Existing
+                const index = productsData.findIndex(p => p.id == id);
+                if (index > -1) {
+                    productsData[index] = { ...productsData[index], name, category, price, unit, badge, spec, image };
+                }
+            } else {
+                // New Product
+                const newId = Date.now();
+                productsData.push({ id: newId, name, category, price, unit, badge, spec, image, stock: "In Stock" });
+            }
+
+            resetProductForm();
+            renderAdminProductsTable();
+        }
+
+        function editProduct(id) {
+            const p = productsData.find(item => item.id == id);
+            if (!p) return;
+
+            document.getElementById('prod-edit-id').value = p.id;
+            document.getElementById('prod-name').value = p.name;
+            document.getElementById('prod-category').value = p.category;
+            document.getElementById('prod-price').value = p.price;
+            document.getElementById('prod-unit').value = p.unit;
+            document.getElementById('prod-badge').value = p.badge;
+            document.getElementById('prod-spec').value = p.spec;
+            document.getElementById('prod-image').value = p.image;
+        }
+
+        function deleteProduct(id) {
+            if (confirm("Delete this product from your shop?")) {
+                productsData = productsData.filter(p => p.id != id);
+                renderAdminProductsTable();
+            }
+        }
+
+        function resetProductForm() {
+            document.getElementById('prod-edit-id').value = '';
+            document.getElementById('prod-name').value = '';
+            document.getElementById('prod-price').value = '';
+            document.getElementById('prod-unit').value = '';
+            document.getElementById('prod-badge').value = '';
+            document.getElementById('prod-spec').value = '';
+            document.getElementById('prod-image').value = '';
+        }
+
+        // Render Catalog Grid
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+
+            const filtered = activeCategory === 'All' 
+                ? productsData 
+                : productsData.filter(p => p.category === activeCategory);
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between group";
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-gray-100">
+                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/0F2C59/ffffff?text=${encodeURIComponent(p.name)}'">
+                            <span class="absolute top-3 left-3 bg-ocean-900/90 backdrop-blur text-teal-400 text-[10px] font-bold px-2.5 py-1 rounded-full border border-teal-500/30">${p.badge}</span>
+                            <span class="absolute top-3 right-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">${p.stock}</span>
+                        </div>
+                        <div class="p-5">
+                            <div class="text-xs text-teal-600 font-semibold mb-1 uppercase tracking-wider">${p.category}</div>
+                            <h3 class="font-bold text-ocean-900 text-base leading-snug mb-2">${p.name}</h3>
+                            <p class="text-xs text-gray-500 mb-3">${p.spec}</p>
+                            <div class="text-xs text-gray-400 font-medium mb-3">Unit: ${p.unit}</div>
+                            <div class="text-xl font-extrabold text-ocean-900">${storeConfig.currency} ${p.price.toFixed(2)}</div>
+                        </div>
+                    </div>
+
+                    <div class="p-5 pt-0 space-y-2">
+                        <div class="flex items-center justify-between bg-gray-50 border border-gray-200 rounded-xl p-1">
+                            <button onclick="changeQtyInput('${p.id}', -1)" class="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-gray-600 hover:bg-gray-100 font-bold">-</button>
+                            <span id="qty-${p.id}" class="text-sm font-bold text-ocean-900 px-3">1</span>
+                            <button onclick="changeQtyInput('${p.id}', 1)" class="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-gray-600 hover:bg-gray-100 font-bold">+</button>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="addToCart(${p.id})" class="w-full bg-ocean-900 hover:bg-ocean-800 text-white font-semibold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-cart-plus"></i> Add
+                            </button>
+                            <button onclick="quickBuyWhatsApp(${p.id})" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-1">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Direct
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCategory(category) {
+            activeCategory = category;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.getAttribute('data-category') === category) {
+                    btn.className = "cat-btn active px-5 py-2.5 rounded-full text-sm font-semibold transition bg-ocean-900 text-white shadow-md";
+                } else {
+                    btn.className = "cat-btn px-5 py-2.5 rounded-full text-sm font-semibold transition bg-white text-gray-700 hover:bg-gray-100 border border-gray-200";
+                }
+            });
+            renderProducts();
+        }
+
+        function changeQtyInput(id, delta) {
+            const span = document.getElementById(`qty-${id}`);
+            let val = parseInt(span.innerText) + delta;
+            if (val < 1) val = 1;
+            span.innerText = val;
+        }
+
+        function addToCart(productId) {
+            const product = productsData.find(p => p.id === productId);
+            const qtySpan = document.getElementById(`qty-${productId}`);
+            const qty = parseInt(qtySpan.innerText) || 1;
+
+            const existingIndex = cart.findIndex(item => item.id === productId);
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += qty;
+            } else {
+                cart.push({ ...product, qty: qty });
+            }
+
+            qtySpan.innerText = '1';
+            updateCartUI();
+            showToast(`Added ${product.name} to cart!`);
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+        }
+
+        function updateCartQty(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    removeFromCart(productId);
+                    return;
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const badge = document.getElementById('cart-badge');
+            const totalDisplay = document.getElementById('cart-total-price');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            if (totalItems > 0) {
+                badge.innerText = totalItems;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            totalDisplay.innerText = `${storeConfig.currency} ${totalPrice.toFixed(2)}`;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-400">
+                        <i class="fa-solid fa-cart-flatbed text-4xl mb-3 text-gray-300"></i>
+                        <p class="text-sm">Your shopping cart is empty.</p>
+                        <a href="#products" onclick="toggleCart()" class="mt-3 inline-block text-xs font-bold text-teal-600 hover:underline">Start Browsing</a>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = '';
+            cart.forEach(item => {
+                const el = document.createElement('div');
+                el.className = "flex items-center gap-3 bg-gray-50 border border-gray-200 p-3 rounded-xl";
+                el.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-lg shrink-0">
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-bold text-xs text-ocean-900 truncate">${item.name}</h4>
+                        <div class="text-[11px] text-gray-500">${storeConfig.currency} ${item.price.toFixed(2)} / ${item.unit}</div>
+                        <div class="text-xs font-bold text-teal-600">${storeConfig.currency} ${(item.price * item.qty).toFixed(2)}</div>
+                    </div>
+                    <div class="flex flex-col items-end gap-1">
+                        <button onclick="removeFromCart(${item.id})" class="text-xs text-red-500 hover:text-red-700 p-1">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                        <div class="flex items-center gap-1 bg-white border border-gray-200 rounded px-1">
+                            <button onclick="updateCartQty(${item.id}, -1)" class="text-xs font-bold px-1 text-gray-600">-</button>
+                            <span class="text-xs font-bold px-1 text-ocean-900">${item.qty}</span>
+                            <button onclick="updateCartQty(${item.id}, 1)" class="text-xs font-bold px-1 text-gray-600">+</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            const overlay = document.getElementById('cart-drawer-overlay');
+
+            const isOpen = !drawer.classList.contains('translate-x-full');
+
+            if (isOpen) {
+                drawer.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+            } else {
+                drawer.classList.remove('translate-x-full');
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // WhatsApp Direct Checkout
+        function sendOrderToWhatsApp() {
+            if (cart.length === 0) {
+                alert("Your cart is empty. Please add items first.");
+                return;
+            }
+
+            const name = document.getElementById('cust-name').value.trim();
+            const location = document.getElementById('cust-location').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const notes = document.getElementById('cust-notes').value.trim();
+
+            if (!name || !location || !phone) {
+                alert("Please fill in your Name, Location, and Phone Number before sending.");
+                return;
+            }
+
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            let message = `🛒 *NEW AQUACULTURE ORDER - ${storeConfig.businessName}*\n`;
+            message += `-----------------------------------\n`;
+            message += `👤 *Customer Name:* ${name}\n`;
+            message += `📍 *Delivery Location:* ${location}\n`;
+            message += `📞 *Contact Phone:* ${phone}\n`;
+            if (notes) message += `📝 *Notes:* ${notes}\n`;
+            message += `-----------------------------------\n\n`;
+            message += `📦 *ORDER ITEMS:*\n`;
+
+            cart.forEach((item, index) => {
+                message += `${index + 1}. *${item.name}*\n`;
+                message += `   • Qty: ${item.qty} x ${storeConfig.currency} ${item.price.toFixed(2)}\n`;
+                message += `   • Unit: ${item.unit}\n`;
+                message += `   • Subtotal: ${storeConfig.currency} ${(item.price * item.qty).toFixed(2)}\n\n`;
+            });
+
+            message += `-----------------------------------\n`;
+            message += `💰 *TOTAL ESTIMATE:* ${storeConfig.currency} ${totalPrice.toFixed(2)}\n`;
+            message += `-----------------------------------\n`;
+            message += `Please confirm availability and delivery fee to my location.`;
+
+            const url = `https://wa.me/${storeConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function quickBuyWhatsApp(productId) {
+            const product = productsData.find(p => p.id === productId);
+            const qtySpan = document.getElementById(`qty-${productId}`);
+            const qty = parseInt(qtySpan.innerText) || 1;
+
+            let message = `Hello *${storeConfig.businessName}*,\n\nI would like to make an inquiry/order for:\n`;
+            message += `• *Product:* ${product.name}\n`;
+            message += `• *Quantity:* ${qty} (${product.unit})\n`;
+            message += `• *Price Each:* ${storeConfig.currency} ${product.price.toFixed(2)}\n`;
+            message += `• *Total Estimate:* ${storeConfig.currency} ${(product.price * qty).toFixed(2)}\n\n`;
+            message += `Please confirm stock and delivery details.`;
+
+            const url = `https://wa.me/${storeConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function quickWhatsAppContact() {
+            let message = `Hello *${storeConfig.businessName}*,\nI am reaching out from your website for technical consultation regarding my fish farm.`;
+            const url = `https://wa.me/${storeConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function requestService(serviceName) {
+            let message = `Hello *${storeConfig.businessName}*,\nI would like to schedule a consultation for your service: *${serviceName}*. Please contact me.`;
+            const url = `https://wa.me/${storeConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast-notification');
+            const msgEl = document.getElementById('toast-message');
+            msgEl.innerText = msg;
+
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+                toast.classList.remove('opacity-100');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
