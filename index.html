@@ -231,6 +231,35 @@
                 <span class="text-teal-600 text-sm font-bold tracking-wider uppercase">Our Store Catalog</span>
             </div>
 
+            <!-- Product Search Box -->
+<div class="max-w-2xl mx-auto mb-8">
+    <div class="relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+
+        <input
+            type="search"
+            id="product-search"
+            oninput="renderProducts()"
+            placeholder="Search products by name or keyword..."
+            aria-label="Search products"
+            class="w-full pl-12 pr-12 py-4 rounded-xl border border-gray-300 bg-white text-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+        >
+
+        <button
+            type="button"
+            onclick="document.getElementById('product-search').value=''; renderProducts();"
+            aria-label="Clear product search"
+            title="Clear search"
+            class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+        >
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <p class="text-xs text-gray-500 mt-2 text-center">
+        Search by product name, category, description, or keyword.
+    </p>
+</div>
             <!-- Category Filter Tabs -->
             <div class="flex flex-wrap justify-center gap-2 mb-10" id="category-tabs">
                 <button onclick="filterCategory('All')" class="cat-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition bg-ocean-900 text-white shadow-md" data-category="All">All Items</button>
@@ -564,10 +593,44 @@
             const grid = document.getElementById('products-grid');
             grid.innerHTML = '';
 
-            const filtered = activeCategory === 'All' 
-                ? productsData 
-                : productsData.filter(p => p.category === activeCategory);
+            const searchInput = document.getElementById('product-search');
+const searchTerm = searchInput ? searchInput.value.trim().toLowerCase() : '';
 
+const keywords = searchTerm.split(/\s+/).filter(Boolean);
+
+const filtered = productsData.filter(p => {
+    const matchesCategory =
+        activeCategory === 'All' || p.category === activeCategory;
+
+    const searchableText = [
+        p.name,
+        p.category,
+        p.spec,
+        p.badge,
+        p.unit
+    ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
+
+    const matchesSearch = keywords.every(keyword =>
+        searchableText.includes(keyword)
+    );
+
+    return matchesCategory && matchesSearch;
+});
+if (filtered.length === 0) {
+    grid.innerHTML = `
+        <div class="col-span-full text-center py-12">
+            <i class="fa-solid fa-magnifying-glass text-4xl text-gray-300 mb-4"></i>
+            <h3 class="text-lg font-bold text-gray-700">No products found</h3>
+            <p class="text-sm text-gray-500 mt-2">
+                Try another keyword or select a different category.
+            </p>
+        </div>
+    `;
+    return;
+}
             filtered.forEach(p => {
                 const card = document.createElement('div');
                 card.className = "bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-lg transition duration-300 flex flex-col justify-between group relative border-t-4 border-t-ocean-900";
