@@ -781,7 +781,7 @@
             });
 
             message += `-----------------------------------\n`;
-            message += `Please confirm availability, current prices, and delivery options to my location.`;
+            message += `Please confirm availability and current prices`;
 
             const url = `https://wa.me/${storeConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
