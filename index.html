@@ -100,7 +100,6 @@
                     </div>
                     <div>
                         <span class="text-xl font-extrabold tracking-tight block leading-none" id="brand-name-display">AKRISET</span>
-                        <span class="text-xs text-teal-400 font-medium tracking-widest uppercase block mt-0.5" id="brand-subtext-display">Products & Services</span>
                     </div>
                 </a>
 
@@ -170,18 +169,11 @@
 
         <!-- Cart Footer & Checkout Form -->
         <div class="p-5 border-t border-gray-200 bg-gray-50 space-y-4">
-            <div class="flex justify-between items-center text-base font-extrabold text-ocean-900 border-b border-gray-200 pb-3">
-                <span>Estimated Total:</span>
-                <span id="cart-total-price" class="text-teal-600">GH₵ 0.00</span>
-            </div>
-
             <!-- Customer Details Form -->
             <div class="space-y-2.5">
                 <h4 class="text-xs font-bold text-gray-700 uppercase tracking-wider">Delivery Information</h4>
                 <input type="text" id="cust-name" placeholder="Your Name / Farm Name *" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
-                <input type="text" id="cust-location" placeholder="Town / Delivery Address *" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
-                <input type="tel" id="cust-phone" placeholder="Contact Phone Number *" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none">
-                <textarea id="cust-notes" rows="2" placeholder="Special delivery or order notes (optional)" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none"></textarea>
+                <textarea id="cust-notes" rows="2" placeholder="Order notes (optional)" class="w-full text-xs p-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:outline-none"></textarea>
             </div>
 
             <button onclick="sendOrderToWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl shadow-lg hover:shadow-emerald-600/30 transition flex items-center justify-center gap-2 text-sm">
@@ -281,6 +273,10 @@
                     </div>
                 </div>
             </div>
+
+            <p class="mt-8 text-center text-xs sm:text-sm text-gray-500 bg-white border border-gray-200 rounded-xl p-4">
+                <strong>Disclaimer:</strong> This catalog is not exhaustive, and not all products available from AKRISET Products &amp; Services are listed here. Please contact us on WhatsApp to enquire about other products.
+            </p>
         </div>
     </section>
 
@@ -288,7 +284,7 @@
     <section id="services" class="py-16 bg-white border-t border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-12">
-                <span class="text-teal-600 text-sm font-bold tracking-wider uppercase">Services & Support</span>
+                <span class="text-teal-600 text-sm font-bold tracking-wider uppercase">Thank You!</span>
             </div>
         </div>
     </section>
@@ -503,7 +499,8 @@
 
         function applyConfigUI() {
             document.getElementById('brand-name-display').innerText = storeConfig.businessName;
-            document.getElementById('brand-subtext-display').innerText = storeConfig.subtext;
+            const brandSubtext = document.getElementById('brand-subtext-display');
+            if (brandSubtext) brandSubtext.innerText = storeConfig.subtext;
             document.getElementById('footer-brand-display').innerText = storeConfig.businessName;
             document.getElementById('copyright-brand-display').innerText = storeConfig.businessName;
             
@@ -576,9 +573,9 @@
                 const card = document.createElement('div');
                 card.className = "bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-lg transition duration-300 flex flex-col justify-between group relative border-t-4 border-t-ocean-900";
                 
-                const priceFormatted = p.price > 0 
-                    ? `${storeConfig.currency} ${p.price.toFixed(2)}` 
-                    : `Inquire Price`;
+                const priceMarkup = p.price > 0
+                    ? `<div class="flex items-baseline gap-2 mb-4"><span class="text-xl font-extrabold text-ocean-900">${storeConfig.currency} ${p.price.toFixed(2)}</span><span class="text-xs text-gray-400 font-medium">/ ${p.unit}</span></div>`
+                    : '';
 
                 card.innerHTML = `
                     <div>
@@ -591,10 +588,7 @@
                         
                         ${p.spec ? `<p class="text-xs text-gray-500 mb-3 bg-gray-50 p-2.5 rounded-xl border border-gray-100"><i class="fa-solid fa-circle-info text-teal-500 mr-1"></i> ${p.spec}</p>` : ''}
                         
-                        <div class="flex items-baseline gap-2 mb-4">
-                            <span class="text-xl font-extrabold text-ocean-900">${priceFormatted}</span>
-                            <span class="text-xs text-gray-400 font-medium">/ ${p.unit}</span>
-                        </div>
+                        ${priceMarkup}
                     </div>
 
                     <div class="space-y-2 pt-2 border-t border-gray-100">
@@ -693,11 +687,7 @@
             const container = document.getElementById('cart-items-container');
             const badge = document.getElementById('cart-badge');
             const floatingBadge = document.getElementById('floating-cart-badge');
-            const totalDisplay = document.getElementById('cart-total-price');
-
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
             if (totalItems > 0) {
                 badge.innerText = totalItems;
                 badge.classList.remove('hidden');
@@ -707,8 +697,6 @@
                 badge.classList.add('hidden');
                 floatingBadge.classList.add('hidden');
             }
-
-            totalDisplay.innerText = totalPrice > 0 ? `${storeConfig.currency} ${totalPrice.toFixed(2)}` : "Price on Request";
 
             if (cart.length === 0) {
                 container.innerHTML = `
@@ -731,7 +719,7 @@
                     </div>
                     <div class="flex-1 min-w-0">
                         <h4 class="font-bold text-xs text-ocean-900 truncate">${item.name}</h4>
-                        <div class="text-[11px] text-gray-500">${item.price > 0 ? `${storeConfig.currency} ${item.price.toFixed(2)}` : 'Inquire Price'} / ${item.unit}</div>
+                        ${item.price > 0 ? `<div class="text-[11px] text-gray-500">${storeConfig.currency} ${item.price.toFixed(2)} / ${item.unit}</div>` : ''}
                     </div>
                     <div class="flex flex-col items-end gap-1">
                         <button onclick="removeFromCart(${item.id})" class="text-xs text-red-500 hover:text-red-700 p-1">
@@ -774,20 +762,16 @@
             }
 
             const name = document.getElementById('cust-name').value.trim();
-            const location = document.getElementById('cust-location').value.trim();
-            const phone = document.getElementById('cust-phone').value.trim();
             const notes = document.getElementById('cust-notes').value.trim();
 
-            if (!name || !location || !phone) {
-                alert("Please fill in your Name, Location, and Phone Number before sending.");
+            if (!name) {
+                alert("Please enter your Name / Farm Name before sending.");
                 return;
             }
 
             let message = `🛒 *NEW ORDER INQUIRY - ${storeConfig.businessName}*\n`;
             message += `-----------------------------------\n`;
             message += `👤 *Customer Name:* ${name}\n`;
-            message += `📍 *Delivery Location:* ${location}\n`;
-            message += `📞 *Contact Phone:* ${phone}\n`;
             if (notes) message += `📝 *Notes:* ${notes}\n`;
             message += `-----------------------------------\n\n`;
             message += `📦 *ORDER ITEMS:*\n`;
