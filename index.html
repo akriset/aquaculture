@@ -865,7 +865,7 @@ if (filtered.length === 0) {
         }
 
         function quickWhatsAppContact() {
-            let message = `Hello *${storeConfig.businessName}*,\nI am reaching out from your website regarding aquaculture supplies and equipment.`;
+            let message = `Hello *${storeConfig.businessName}*,\nI am reaching out regarding your aquaculture supplies and equipment.`;
             const url = `https://wa.me/${storeConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
         }
